@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TikTok auth callback</title>
+</head>
+<body style="font-family:system-ui,sans-serif;max-width:640px;margin:40px auto;padding:0 16px;line-height:1.5">
+<h1 style="font-size:22px;font-weight:600">TikTok authorization</h1>
+<p>Copy this code and paste it into your terminal:</p>
+<pre id="code" style="background:#f4f4f4;padding:16px;border-radius:8px;word-break:break-all;font-size:15px">(reading…)</pre>
+<button id="copy" style="padding:8px 16px;font-size:15px;border-radius:8px;border:1px solid #ccc;cursor:pointer">Copy code</button>
+<p style="margin-top:24px">Then run:</p>
+<pre style="background:#f4f4f4;padding:16px;border-radius:8px;font-size:14px">.venv/bin/python -m src.pull_tiktok --code &lt;CODE&gt;</pre>
+<p id="err" style="color:#c00"></p>
+<script>
+  var params = new URLSearchParams(location.search);
+  var code = params.get("code");
+  var el = document.getElementById("code");
+  if (code) {
+    el.textContent = code;
+  } else {
+    el.textContent = "(no code found)";
+    document.getElementById("err").textContent =
+      "No ?code= in this URL. Did you approve the app, and is this the redirected page?";
+  }
+  document.getElementById("copy").addEventListener("click", function () {
+    navigator.clipboard.writeText(el.textContent);
+    this.textContent = "Copied";
+  });
+</script>
+</body>
+</html>
